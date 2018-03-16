@@ -43,14 +43,15 @@
     mode: 0640
   with_dict: dnsmasq_dirs
 
-- name: DNSmasq | adblock list
+- name: DNSmasq | adblock lists
   tags:
     - config
   get_url:
-    url : "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
-    dest: "{{ dnsmasq_dirs.hosts }}/adblock"
+    url : "{{ item.value }}"
+    dest: "{{ dnsmasq_dirs.hosts }}/adblock-{{ item.key }}"
     group: "{{ dnsmasq_group }}"
     mode: 0640
+  with_dict: adblock_urls
 
 - name: DNSMasq | service
   tags:
