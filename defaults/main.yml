@@ -4,4 +4,9 @@ dnsmasq_domains: []
 dnsmasq_dhcp_ranges: []
 dnsmasq_hosts: ''
 dnsmasq_servers: ''
-dnsmasq_cnames:
+dnsmasq_cnames: {}
+
+dnsmasq_dirs:
+  hosts: /etc/dnsmasq.d/.hosts
+  dhcp_hosts: /etc/dnsmasq.d/.dhcp-hosts
+  dhcp_opts: /etc/dnsmasq.d/.dhcp-opts

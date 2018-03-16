@@ -27,7 +27,9 @@ cache-size=200		# Number of DNS results
 
 # Upstream DNS servers
 no-resolv		# only use specified servers
-servers-file=/etc/dnsmasq.d/servers
+servers-file=/etc/dnsmasq.d/.servers
+
+hostsdir={{ dnsmasq_dirs.hosts }}
 
 #auth-zone={{ dnsmasq_domain }},{{ dnsmasq_interface }}/6
 #auth-sec-servers={{ dnsmasq_dns2 }}
@@ -41,9 +43,8 @@ domain={{ domain }}
 dhcp-range={{ range }}
 {% endfor %}
 
-dhcp-hostsfile=/etc/dnsmasq.d/hosts
-dhcp-optsfile=/etc/dnsmasq.d/opts
-addn-hosts=/etc/dnsmasq.d/hosts/adblock	# in /etc/hosts format
+dhcp-hostsdir={{ dnsmasq_dirs.dhcp_hosts }}
+dhcp-optsdir={{ dnsmasq_dirs.dhcp_opts }}
 
 quiet-dhcp		# don't log DHCP traffic
 localmx			# Mailhost is this server
