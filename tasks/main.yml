@@ -32,23 +32,21 @@
     group: dip
     mode: 0440
   with_items:
-    - { src=dnsmasq.conf }
-    - { src=dnsmasq.hosts, dest=/etc/dnsmasq.d/hosts/ }
-    - { src=dnsmasq.servers, dest=/etc/dnsmasq.d/servers }
+    - { src: dnsmasq.conf }
+    - { src: dnsmasq, dest: /etc/default/ }
+    - { src: servers, dest: /etc/dnsmasq.d/.servers }
   notify: restart dnsmasq
 
-- name: DNSmasq | config (copy)
+- name: DNSmasq | config in dirs
   tags:
-  - config
-  copy:
-    src : "{{ item.src  }}"
-    dest: "{{ item.dest }}"
+    - config
+  template:
+    src : "{{ item.key }}.j2"
+    dest: "{{ item.value }}/{{ item.key }}"
     owner: dnsmasq
+    group: dip
     mode: 0440
-  with_items: 
-    - { src: dnsmasq.opts, dest: /etc/ }
-    - { src: dnsmasq, dest: /etc/default/ }
-  notify: reload dnsmasq
+  with_dict: dnsmasq_dirs
 
 - name: DNSmasq | adblock list
   tags:
