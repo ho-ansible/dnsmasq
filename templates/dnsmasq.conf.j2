@@ -29,6 +29,9 @@ cache-size=200		# Number of DNS results
 no-resolv		# only use specified servers
 servers-file=/etc/dnsmasq.servers
 
+#auth-zone={{ dnsmasq_domain }},{{ dnsmasq_interface }}/6
+#auth-sec-servers={{ dnsmasq_dns2 }}
+
 # DHCP
 domain={{ tinc_domain }},{{ tinc_subnet }}.0/24,local
 
@@ -42,10 +45,7 @@ addn-hosts=/etc/adblock.hosts	# in /etc/hosts format
 quiet-dhcp		# don't log DHCP traffic
 localmx			# Mailhost is this server
 dhcp-generate-names	# Use MAC to make a name if not supplied by client
-
-#dhcp-authoritative
-#auth-zone={{ tinc_domain }},{{ tinc_prefix }}{{ tinc_name }}/6
-#auth-sec-servers={{ tinc_subnet }}.2
+dhcp-authoritative	# No other DHCP servers on this interface
 
 {% for alias, target in dnsmasq_cnames.iteritems() %}
 cname={{ alias }},{{ target }}
