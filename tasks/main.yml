@@ -11,16 +11,13 @@
 
 - name: DNSMasq | dirs
   tags:
-  - dir
+    - dir
   file:
-    path: "/etc/dnsmasq.d/{{ item }}"
+    path: "{{ item.value }}"
     state: directory
     owner: dnsmasq
     group: dip
-  with_items:
-    - hosts
-    - dhcp-hosts
-    - dhcp-opts
+  with_dict: dnsmasq_dirs
 
 - name: DNSmasq | config (template)
   tags:
