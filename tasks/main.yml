@@ -15,8 +15,8 @@
   file:
     path: "{{ item.value }}"
     state: directory
-    owner: dnsmasq
-    group: dip
+    group: "{{ dnsmasq_group }}"
+    mode: 0750
   with_dict: dnsmasq_dirs
 
 - name: DNSmasq | config (template)
@@ -25,9 +25,8 @@
   template:
     src : "{{ item.src }}.j2"
     dest: "{{ item.dest }}/{{ item.src }}"
-    owner: dnsmasq
-    group: dip
-    mode: 0440
+    group: "{{ dnsmasq_group }}"
+    mode: 0640
   with_items:
     - { src: dnsmasq.conf, dest: /etc/ }
     - { src: dnsmasq, dest: /etc/default/ }
@@ -40,9 +39,8 @@
   template:
     src : "{{ item.key }}.j2"
     dest: "{{ item.value }}/{{ item.key }}"
-    owner: dnsmasq
-    group: dip
-    mode: 0440
+    group: "{{ dnsmasq_group }}"
+    mode: 0640
   with_dict: dnsmasq_dirs
 
 - name: DNSmasq | adblock list
@@ -51,6 +49,8 @@
   get_url:
     url : "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
     dest: "{{ dnsmasq_dirs.hosts }}/adblock"
+    group: "{{ dnsmasq_group }}"
+    mode: 0640
 
 - name: DNSMasq | service
   tags:

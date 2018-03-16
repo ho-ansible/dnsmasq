@@ -6,6 +6,8 @@ dnsmasq_hosts: ''
 dnsmasq_servers: ''
 dnsmasq_cnames: {}
 
+dnsmasq_user: dnsmasq
+dnsmasq_group: dip
 dnsmasq_dirs:
   hosts: /etc/dnsmasq.d/.hosts
   dhcp_hosts: /etc/dnsmasq.d/.dhcp-hosts
