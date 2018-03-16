@@ -9,18 +9,32 @@
     - dnsmasq
     - dnsmasq-utils
 
+- name: DNSMasq | dirs
+  tags:
+  - dir
+  file:
+    path: "/etc/dnsmasq.d/{{ item }}"
+    state: directory
+    owner: dnsmasq
+    group: dip
+  with_items:
+    - hosts
+    - dhcp-hosts
+    - dhcp-opts
+
 - name: DNSmasq | config (template)
   tags:
   - config
   template:
-    src : "{{ item  }}.j2"
-    dest: "/etc/{{ item }}"
+    src : "{{ item.src }}.j2"
+    dest: "{{ item.dest | d('/etc/' ~ item.src, true) }}"
     owner: dnsmasq
+    group: dip
     mode: 0440
   with_items:
-    - dnsmasq.conf
-    - dnsmasq.hosts
-    - dnsmasq.servers
+    - { src=dnsmasq.conf }
+    - { src=dnsmasq.hosts, dest=/etc/dnsmasq.d/hosts/ }
+    - { src=dnsmasq.servers, dest=/etc/dnsmasq.d/servers }
   notify: restart dnsmasq
 
 - name: DNSmasq | config (copy)
@@ -41,7 +55,7 @@
   - config
   get_url:
     url : "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
-    dest: "/etc/adblock.hosts"
+    dest: "/etc/dnsmasq.d/hosts/adblock"
   notify: reload dnsmasq
 
 - name: DNSMasq | service
