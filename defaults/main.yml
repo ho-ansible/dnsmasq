@@ -1,5 +1,6 @@
 ---
 dnsmasq_interface: lo
+dnsmasq_domains: []
 dnsmasq_hosts: ''
 dnsmasq_servers: ''
 dnsmasq_cnames:

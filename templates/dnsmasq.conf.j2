@@ -33,7 +33,9 @@ servers-file=/etc/dnsmasq.servers
 #auth-sec-servers={{ dnsmasq_dns2 }}
 
 # DHCP
-domain={{ tinc_domain }},{{ tinc_subnet }}.0/24,local
+{% for domain in dnsmasq_domains %}
+domain={{ domain }}
+{% endfor %}
 
 dhcp-range=interface:{{ tinc_prefix }}{{ tinc_name }},{{ tinc_subnet }}.128,{{ tinc_subnet }}.250,255.255.255.0,3h
 dhcp-range=::100:1,::100:ffff,constructor:{{ ansible_default_ipv4.interface }},3h
