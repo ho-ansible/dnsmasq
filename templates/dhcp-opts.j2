@@ -2,10 +2,6 @@
 # See /etc/dnsmasq.conf: dhcp-optsfile=
 # {{ ansible_managed }}
 
-{% for opt in dnsmasq_dhcp_opts %}
-option:{{ opt }}
-{% endfor %}
-
 option:nis-server,0.0.0.0
 option:netbios-ns,0.0.0.0
 option:netbios-dd,0.0.0.0
@@ -13,4 +9,8 @@ option:netbios-nodetype,8
 
 252,""		# Windows requires WPAD proxy URL
 vendor:MSFT,2,1i	# Remind Windows to release DHCP lease on shutdown
+
+{% for opt in dnsmasq_dhcp_opts %}
+option:{{ opt }}
+{% endfor %}
 
