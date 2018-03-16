@@ -27,12 +27,12 @@
   - config
   template:
     src : "{{ item.src }}.j2"
-    dest: "{{ item.dest | d('/etc/' ~ item.src, true) }}"
+    dest: "{{ item.dest }}/{{ item.src }}"
     owner: dnsmasq
     group: dip
     mode: 0440
   with_items:
-    - { src: dnsmasq.conf }
+    - { src: dnsmasq.conf, dest: /etc/ }
     - { src: dnsmasq, dest: /etc/default/ }
     - { src: servers, dest: /etc/dnsmasq.d/.servers }
   notify: restart dnsmasq
@@ -50,11 +50,10 @@
 
 - name: DNSmasq | adblock list
   tags:
-  - config
+    - config
   get_url:
     url : "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
-    dest: "/etc/dnsmasq.d/hosts/adblock"
-  notify: reload dnsmasq
+    dest: "{{ dnsmasq_dirs.hosts }}/adblock"
 
 - name: DNSMasq | service
   tags:
