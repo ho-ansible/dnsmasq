@@ -2,7 +2,7 @@
 # See "/usr/sbin/dnsmasq --help" or "man 8 dnsmasq" for details.
 # {{ansible_managed}}
 
-interface={{ tinc_prefix }}{{ tinc_name }}	# listen (+ lo)
+interface={{ dnsmasq_interface }}	# listen (+ lo)
 # bind-dynamic
 
 user=dnsmasq	# Drop privs
