@@ -17,7 +17,7 @@
     state: directory
     group: "{{ dnsmasq_group }}"
     mode: 0750
-  with_dict: dnsmasq_dirs
+  with_dict: "{{ dnsmasq_dirs }}"
 
 - name: DNSmasq | static config
   tags:
