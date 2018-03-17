@@ -43,8 +43,8 @@ domain={{ domain }}
 dhcp-range={{ range }}
 {% endfor %}
 
-dhcp-hostsdir={{ dnsmasq_dirs.dhcp_hosts }}
-dhcp-optsdir={{ dnsmasq_dirs.dhcp_opts }}
+dhcp-hostsdir={{ dnsmasq_dirs.dhcp-hosts }}
+dhcp-optsdir={{ dnsmasq_dirs.dhcp-opts }}
 
 quiet-dhcp		# don't log DHCP traffic
 localmx			# Mailhost is this server

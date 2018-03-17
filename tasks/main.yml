@@ -19,7 +19,7 @@
     mode: 0750
   with_dict: dnsmasq_dirs
 
-- name: DNSmasq | config (template)
+- name: DNSmasq | static config
   tags:
   - config
   template:
@@ -33,7 +33,7 @@
     - { src: servers, dest: /etc/dnsmasq.d/.servers }
   notify: restart dnsmasq
 
-- name: DNSmasq | config in dirs
+- name: DNSmasq | dynamic config in subdirs
   tags:
     - config
   template:
