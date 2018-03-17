@@ -1,4 +1,6 @@
 ##
 # /etc/dnsmasq.d/.hosts/hosts
 # {{ ansible_managed }}
-{{ dnsmasq_hosts }}
+{% for host in dnsmasq_hosts %}
+{{ host }}
+{% endfor %}
