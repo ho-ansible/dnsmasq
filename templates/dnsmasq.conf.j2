@@ -31,9 +31,6 @@ servers-file=/etc/dnsmasq.d/.servers
 
 hostsdir={{ dnsmasq_dirs.hosts }}
 
-#auth-zone={{ dnsmasq_domain }},{{ dnsmasq_interface }}/6
-#auth-sec-servers={{ dnsmasq_dns2 }}
-
 # DHCP
 {% for domain in dnsmasq_domains %}
 domain={{ domain }}
