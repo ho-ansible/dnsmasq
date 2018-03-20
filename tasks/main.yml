@@ -31,6 +31,7 @@
     - { src: dnsmasq.conf, dest: /etc/ }
     - { src: dnsmasq, dest: /etc/default/ }
     - { src: servers, dest: /etc/dnsmasq.d/.servers }
+    - { src: logrotate.d/dnsmasq, dest: /etc }
   notify: restart dnsmasq
 
 - name: DNSmasq | dynamic config in subdirs
