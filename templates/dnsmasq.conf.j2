@@ -40,8 +40,8 @@ domain={{ domain }}
 dhcp-range={{ range }}
 {% endfor %}
 
-dhcp-hostsdir={{ dnsmasq_dirs.dhcp-hosts }}
-dhcp-optsdir={{ dnsmasq_dirs.dhcp-opts }}
+dhcp-hostsdir={{ dnsmasq_dirs['dhcp-hosts'] }}
+dhcp-optsdir={{ dnsmasq_dirs['dhcp-opts'] }}
 
 quiet-dhcp		# don't log DHCP traffic
 dhcp-generate-names	# Use MAC to make a name if not supplied by client

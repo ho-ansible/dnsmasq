@@ -15,5 +15,5 @@ dnsmasq_user: dnsmasq
 dnsmasq_group: dip
 dnsmasq_dirs:
   hosts: /etc/dnsmasq.d/.hosts
-  dhcp-hosts: /etc/dnsmasq.d/.dhcp-hosts
-  dhcp-opts: /etc/dnsmasq.d/.dhcp-opts
+  'dhcp-hosts': /etc/dnsmasq.d/.dhcp-hosts
+  'dhcp-opts': /etc/dnsmasq.d/.dhcp-opts
