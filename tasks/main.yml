@@ -9,16 +9,6 @@
     - dnsmasq
     - dnsmasq-utils
 
-- name: DNSMasq | dirs
-  tags:
-    - dir
-  file:
-    path: "{{ item.value }}"
-    state: directory
-    group: "{{ dnsmasq_group }}"
-    mode: 0750
-  with_dict: "{{ dnsmasq_dirs }}"
-
 - name: DNSmasq | static config
   tags:
   - config
@@ -30,28 +20,38 @@
   with_items:
     - { src: dnsmasq.conf, dest: /etc/ }
     - { src: dnsmasq, dest: /etc/default/ }
-    - { src: servers, dest: /etc/dnsmasq.d/.servers }
+    - { src: servers, dest: "{{ dnsmasq_conf_dir }}" }
   notify: restart dnsmasq
+
+- name: DNSMasq | config subdirs
+  tags:
+    - dir
+  file:
+    path: "{{ dnsmasq_conf_dir ~ item }}"
+    state: directory
+    group: "{{ dnsmasq_group }}"
+    mode: 0750
+  with_items: "{{ dnsmasq_dirs }}"
 
 - name: DNSmasq | dynamic config in subdirs
   tags:
     - config
   template:
-    src : "{{ item.key }}.j2"
-    dest: "{{ item.value }}/{{ item.key }}"
+    src : "{{ item }}.j2"
+    dest: "{{ dnsmasq_conf_dir ~ item ~ '/' ~ item }}"
     group: "{{ dnsmasq_group }}"
     mode: 0640
-  with_dict: dnsmasq_dirs
+  with_items: "{{ dnsmasq_dirs }}"
 
 - name: DNSmasq | adblock lists
   tags:
     - config
   get_url:
     url : "{{ item.value }}"
-    dest: "{{ dnsmasq_dirs.hosts }}/adblock-{{ item.key }}"
+    dest: "{{ dnsmasq_conf_dir }}hosts/adblock-{{ item.key }}"
     group: "{{ dnsmasq_group }}"
     mode: 0640
-  with_dict: adblock_urls
+  with_dict: "{{ adblock_urls }}"
 
 - name: DNSmasq | logrotate
   tags:

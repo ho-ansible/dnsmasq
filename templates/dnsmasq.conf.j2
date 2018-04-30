@@ -8,7 +8,7 @@ interface={{ dnsmasq_interface }}	# listen (+ lo)
 user=dnsmasq	# Drop privs
 group=dip
 
-log-facility=/var/log/dnsmasq
+log-facility={{ dnsmasq_log }}
 log-async
 
 # DNS
@@ -27,9 +27,11 @@ cache-size=200		# Number of DNS results
 
 # Upstream DNS servers
 no-resolv		# only use specified servers
-servers-file=/etc/dnsmasq.d/.servers
+servers-file={{ dnsmasq_conf_dir }}servers
 
-hostsdir={{ dnsmasq_dirs.hosts }}
+{% for dir in dnsmasq_dirs %}
+{{ dir ~ 'dir=' ~ dnsmasq_conf_dir ~ dir }}
+{% endfor %}
 
 # DHCP
 {% for domain in dnsmasq_domains %}
@@ -39,9 +41,6 @@ domain={{ domain }}
 {% for range in dnsmasq_dhcp_ranges %}
 dhcp-range={{ range }}
 {% endfor %}
-
-dhcp-hostsdir={{ dnsmasq_dirs['dhcp-hosts'] }}
-dhcp-optsdir={{ dnsmasq_dirs['dhcp-opts'] }}
 
 quiet-dhcp		# don't log DHCP traffic
 dhcp-generate-names	# Use MAC to make a name if not supplied by client

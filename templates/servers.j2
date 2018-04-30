@@ -1,6 +1,7 @@
-##
-# /etc/dnsmasq.d/.servers
+## {{ dnsmasq_conf_dir }}servers
+# See /etc/dnsmasq.conf: servers-file
 # {{ ansible_managed }}
+
 {% for srv in dnsmasq_servers %}
 server={{ srv }}
 {% endfor %}

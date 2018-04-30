@@ -1,6 +1,7 @@
-##
-# /etc/dnsmasq.d/.dhcp-hosts/dhcp-hosts
+## {{ dnsmasq_conf_dir }}dhcp-hosts/dhcp-hosts
+# See /etc/dnsmasq.conf: dhcp-hostsdir
 # {{ ansible_managed }}
+
 {% for host in dnsmasq_dhcp_hosts %}
 {{ host }}
 {% endfor %}

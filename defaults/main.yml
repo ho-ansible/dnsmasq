@@ -13,7 +13,7 @@ adblock_urls:
 
 dnsmasq_user: dnsmasq
 dnsmasq_group: dip
-dnsmasq_dirs:
-  hosts: /etc/dnsmasq.d/.hosts
-  'dhcp-hosts': /etc/dnsmasq.d/.dhcp-hosts
-  'dhcp-opts': /etc/dnsmasq.d/.dhcp-opts
+
+# leave trailing slash
+dnsmasq_conf_dir: '/etc/dnsmasq.d/'
+dnsmasq_log: /var/log/dnsmasq

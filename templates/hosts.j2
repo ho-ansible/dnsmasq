@@ -1,6 +1,7 @@
-##
-# /etc/dnsmasq.d/.hosts/hosts
+## {{ dnsmasq_conf_dir }}hosts/hosts
+# See /etc/dnsmasq.conf: hostsdir
 # {{ ansible_managed }}
+
 {% for host in dnsmasq_hosts %}
 {{ host }}
 {% endfor %}

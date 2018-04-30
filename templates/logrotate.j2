@@ -1,11 +1,9 @@
 ## /etc/logrotate.d/dnsmasq
-## log location defined in rsyslog role
-## pidfile location defined in /etc/init.d/dnsmasq (Debian)
-## {{ ansible_managed }}
+# {{ ansible_managed }}
 
-/var/log/dnsmasq {
+{{ dnsmasq_log }} {
   create 640 {{ dnsmasq_user }} adm
   postrotate
-    [ ! -f /run/dnsmasq/dnsmasq.pid ] || kill -HUP `cat /run/dnsmasq/dnsmasq.pid`
+    [ ! -f {{ dnsmasq_pid }} ] || kill -HUP `cat {{ dnsmasq_pid }}`
   endscript
 }
