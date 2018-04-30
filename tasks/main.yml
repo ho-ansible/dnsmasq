@@ -58,7 +58,7 @@
     - logrotate
   template:
     src: logrotate.j2
-    dest: /etc/logrotate/dnsmasq
+    dest: /etc/logrotate.d/dnsmasq
 
 - name: DNSMasq | service
   tags:
