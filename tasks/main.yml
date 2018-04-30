@@ -31,7 +31,6 @@
     - { src: dnsmasq.conf, dest: /etc/ }
     - { src: dnsmasq, dest: /etc/default/ }
     - { src: servers, dest: /etc/dnsmasq.d/.servers }
-    - { src: logrotate.d/dnsmasq, dest: /etc }
   notify: restart dnsmasq
 
 - name: DNSmasq | dynamic config in subdirs
@@ -53,6 +52,13 @@
     group: "{{ dnsmasq_group }}"
     mode: 0640
   with_dict: adblock_urls
+
+- name: DNSmasq | logrotate
+  tags:
+    - logrotate
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate/dnsmasq
 
 - name: DNSMasq | service
   tags:
