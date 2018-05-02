@@ -2,12 +2,11 @@
 
 - name: DNSMasq | package
   tags:
-  - package
+    - package
   package:
-    name: "{{ item }}"
-  with_items:
-    - dnsmasq
-    - dnsmasq-utils
+    name:
+      - dnsmasq
+      - dnsmasq-utils
 
 - name: DNSmasq | static config
   tags:
