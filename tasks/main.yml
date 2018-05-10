@@ -47,7 +47,7 @@
     - config
   get_url:
     url : "{{ item.value }}"
-    dest: "{{ dnsmasq_conf_dir }}hosts/adblock-{{ item.key }}"
+    dest: "{{ dnsmasq_conf_dir ~ 'hosts/' ~ item.key }}"
     group: "{{ dnsmasq_group }}"
     mode: 0640
   with_dict: "{{ adblock_urls }}"
