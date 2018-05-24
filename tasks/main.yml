@@ -16,7 +16,7 @@
     dest: "{{ item.dest }}/{{ item.src }}"
     group: "{{ dnsmasq_group }}"
     mode: 0640
-  with_items:
+  loop:
     - { src: dnsmasq.conf, dest: /etc/ }
     - { src: dnsmasq, dest: /etc/default/ }
     - { src: servers, dest: "{{ dnsmasq_conf_dir }}" }
@@ -30,7 +30,7 @@
     state: directory
     group: "{{ dnsmasq_group }}"
     mode: 0750
-  with_items: "{{ dnsmasq_dirs }}"
+  loop: "{{ q('list', dnsmasq_dirs) }}"
 
 - name: DNSmasq | dynamic config in subdirs
   tags:
@@ -40,7 +40,7 @@
     dest: "{{ dnsmasq_conf_dir ~ item ~ '/' ~ item }}"
     group: "{{ dnsmasq_group }}"
     mode: 0640
-  with_items: "{{ dnsmasq_dirs }}"
+  loop: "{{ q('list', dnsmasq_dirs) }}"
 
 - name: DNSmasq | adblock lists
   tags:
@@ -50,7 +50,7 @@
     dest: "{{ dnsmasq_conf_dir ~ 'hosts/' ~ item.key }}"
     group: "{{ dnsmasq_group }}"
     mode: 0640
-  with_dict: "{{ adblock_urls }}"
+  loop: "{{ q('dict', adblock_urls) }}"
 
 - name: DNSmasq | logrotate
   tags:
