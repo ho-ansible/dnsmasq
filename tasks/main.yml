@@ -30,7 +30,7 @@
     state: directory
     group: "{{ dnsmasq_group }}"
     mode: 0750
-  loop: "{{ q('list', dnsmasq_dirs) }}"
+  loop: "{{ dnsmasq_dirs }}"
 
 - name: DNSmasq | dynamic config in subdirs
   tags:
@@ -40,7 +40,7 @@
     dest: "{{ dnsmasq_conf_dir ~ item ~ '/' ~ item }}"
     group: "{{ dnsmasq_group }}"
     mode: 0640
-  loop: "{{ q('list', dnsmasq_dirs) }}"
+  loop: "{{ dnsmasq_dirs }}"
 
 - name: DNSmasq | adblock lists
   tags:
