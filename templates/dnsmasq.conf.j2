@@ -3,7 +3,7 @@
 # {{ansible_managed}}
 
 interface={{ dnsmasq_interface }}	# listen (+ lo)
-# bind-dynamic
+bind-interfaces	# only bind to above interface
 
 user=dnsmasq	# Drop privs
 group=dip
