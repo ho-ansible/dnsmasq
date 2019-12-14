@@ -24,16 +24,8 @@ Only tested on Debian stable, for now.
 ## Dependencies
 None.
 
-## Example Playbook
-
-```
-- hosts: dns
-  roles:
-    - { role: ho-ansible.dnsmasq }
-```
-
 ## License
-MIT
+Ansible role licensed [MIT](LICENSE).
 
 ## Author Information
 Sean Ho, https://github.com/ho-ansible/
