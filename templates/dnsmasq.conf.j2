@@ -10,7 +10,6 @@ log-facility={{ dnsmasq_log }}
 log-async
 quiet-dhcp		# don't log DHCP traffic
 
-# DNS
 domain-needed		# Only forward FQDNs to upstream DNS
 bogus-priv		# Never forward private-IP reverse lookups
 bogus-nxdomain=64.94.110.11	# Verisign
@@ -24,7 +23,6 @@ conntrack		# Accting: inbound req + outbound upstream
 cache-size=200		# Number of DNS results
 #local-ttl=600		# Clients cache DNS results for this long
 
-# Upstream DNS servers
 no-resolv		# only use specified servers
 servers-file={{ dnsmasq_conf_dir }}/servers
 
@@ -32,19 +30,4 @@ servers-file={{ dnsmasq_conf_dir }}/servers
 {{ dir ~ 'dir=' ~ dnsmasq_conf_dir ~ '/' ~ dir }}
 {% endfor %}
 
-# DHCP
-{% for domain in dnsmasq_domains %}
-domain={{ domain }}
-{% endfor %}
-
-{% for range in dnsmasq_dhcp_ranges %}
-dhcp-range={{ range }}
-{% endfor %}
-
-{% for alias, target in dnsmasq_cnames.iteritems() %}
-cname={{ alias }},{{ target }}
-{% endfor %}
-
-{% for key, val in dnsmasq_config.items() %}
-{{ key }}={{ val }}
-{% endfor %}
+{{ dnsmasq_config }}

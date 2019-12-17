@@ -1,13 +1,10 @@
 ---
 dnsmasq_interface: lo
-dnsmasq_domains: []
 dnsmasq_hosts: []
 dnsmasq_servers: []
-dnsmasq_dhcp_ranges: []
 dnsmasq_dhcp_hosts: []
 dnsmasq_dhcp_opts: []
-dnsmasq_cnames: {}
-dnsmasq_config: {}
+dnsmasq_config: 
 
 dnsmasq_host_urls:
   StevenBlack: "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
