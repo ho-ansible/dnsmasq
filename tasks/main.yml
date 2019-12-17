@@ -43,7 +43,7 @@
     mode: "0640"
   loop: "{{ dnsmasq_dirs }}"
 
-- name: DNSmasq | adblock lists
+- name: DNSmasq | host lists from URL
   tags:
     - config
   get_url:
@@ -51,7 +51,7 @@
     dest: "{{ dnsmasq_conf_dir }}/hosts/{{ item.key }}"
     group: "{{ dnsmasq_group }}"
     mode: "0640"
-  loop: "{{ adblock_urls.items() }}"
+  loop: "{{ dnsmasq_host_urls.items() }}"
 
 - name: DNSmasq | logrotate
   tags:

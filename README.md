@@ -9,12 +9,14 @@ Only tested on Debian stable, for now.
 + `dnsmasq_interface` (default: lo): network interface to bind to
 + `dnsmasq_domains`: "domain" lines (see dnsmasq.conf (5))
 + `dnsmasq_hosts`: static host entries
-+ `dnsmasq_servers`: upstream servers 
++ `dnsmasq_servers`: upstream DNS servers 
 + `dnsmasq_dhcp_ranges`: DHCP server config
 + `dnsmasq_dhcp_hosts`: static IPs issued via DHCP
 + `dnsmasq_dhcp_opts`: options issued with DHCP lease
-+ `dnsmasq_cnames`: (target, source) pairs
-+ `adblock_urls`: (name, URL) pairs
++ `dnsmasq_cnames`: dict of (target, source) pairs
++ `dnsmasq_host_urls`: dict of (name, URL) pairs
++ `dnsmasq_config`: dict of (key, value) pairs for additional entries
+  in `/etc/dnsmasq.conf`
 + `dnsmasq_user` (default: dnsmasq): unprivileged user to run as
 + `dnsmasq_group` (default: dip): unprivileged group to run as
 + `dnsmasq_conf_dir` (default: '/etc/dnsmasq.d/'): where all config
