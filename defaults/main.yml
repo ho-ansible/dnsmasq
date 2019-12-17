@@ -7,6 +7,7 @@ dnsmasq_dhcp_ranges: []
 dnsmasq_dhcp_hosts: []
 dnsmasq_dhcp_opts: []
 dnsmasq_cnames: {}
+dnsmasq_config: {}
 
 adblock_urls:
   StevenBlack: "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
@@ -14,6 +15,5 @@ adblock_urls:
 dnsmasq_user: dnsmasq
 dnsmasq_group: dip
 
-# leave trailing slash
-dnsmasq_conf_dir: '/etc/dnsmasq.d/'
+dnsmasq_conf_dir: '/etc/dnsmasq.d'
 dnsmasq_log: /var/log/dnsmasq

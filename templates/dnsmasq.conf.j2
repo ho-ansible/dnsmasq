@@ -1,6 +1,4 @@
-# Configuration file for dnsmasq.
-# See "/usr/sbin/dnsmasq --help" or "man 8 dnsmasq" for details.
-# {{ansible_managed}}
+# {{ ansible_managed }}
 
 interface={{ dnsmasq_interface }}	# listen (+ lo)
 bind-interfaces	# only bind to above interface
@@ -10,6 +8,7 @@ group=dip
 
 log-facility={{ dnsmasq_log }}
 log-async
+quiet-dhcp		# don't log DHCP traffic
 
 # DNS
 domain-needed		# Only forward FQDNs to upstream DNS
@@ -27,10 +26,10 @@ cache-size=200		# Number of DNS results
 
 # Upstream DNS servers
 no-resolv		# only use specified servers
-servers-file={{ dnsmasq_conf_dir }}servers
+servers-file={{ dnsmasq_conf_dir }}/servers
 
 {% for dir in dnsmasq_dirs %}
-{{ dir ~ 'dir=' ~ dnsmasq_conf_dir ~ dir }}
+{{ dir ~ 'dir=' ~ dnsmasq_conf_dir ~ '/' ~ dir }}
 {% endfor %}
 
 # DHCP
@@ -42,10 +41,10 @@ domain={{ domain }}
 dhcp-range={{ range }}
 {% endfor %}
 
-quiet-dhcp		# don't log DHCP traffic
-dhcp-generate-names	# Use MAC to make a name if not supplied by client
-dhcp-authoritative	# No other DHCP servers on this interface
-
 {% for alias, target in dnsmasq_cnames.iteritems() %}
 cname={{ alias }},{{ target }}
+{% endfor %}
+
+{% for key, val in dnsmasq_config.items() %}
+{{ key }}={{ val }}
 {% endfor %}

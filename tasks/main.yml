@@ -8,6 +8,16 @@
       - dnsmasq
       - dnsmasq-utils
 
+- name: DNSMasq | config subdirs
+  tags:
+    - dir
+  file:
+    path: "{{ dnsmasq_conf_dir }}/{{ item }}"
+    state: directory
+    group: "{{ dnsmasq_group }}"
+    mode: "0750"
+  loop: "{{ dnsmasq_dirs }}"
+
 - name: DNSmasq | static config
   tags:
   - config
@@ -15,31 +25,22 @@
     src : "{{ item.src }}.j2"
     dest: "{{ item.dest }}/{{ item.src }}"
     group: "{{ dnsmasq_group }}"
-    mode: 0640
+    mode: "0640"
   loop:
-    - { src: dnsmasq.conf, dest: /etc/ }
-    - { src: dnsmasq, dest: /etc/default/ }
+    - { src: dnsmasq.conf, dest: /etc }
+    - { src: dnsmasq, dest: /etc/default }
     - { src: servers, dest: "{{ dnsmasq_conf_dir }}" }
   notify: restart dnsmasq
 
-- name: DNSMasq | config subdirs
-  tags:
-    - dir
-  file:
-    path: "{{ dnsmasq_conf_dir ~ item }}"
-    state: directory
-    group: "{{ dnsmasq_group }}"
-    mode: 0750
-  loop: "{{ dnsmasq_dirs }}"
-
+# Config in subdirs can be updated without restart
 - name: DNSmasq | dynamic config in subdirs
   tags:
     - config
   template:
     src : "{{ item }}.j2"
-    dest: "{{ dnsmasq_conf_dir ~ item ~ '/' ~ item }}"
+    dest: "{{ dnsmasq_conf_dir }}/{{ item }}/main"
     group: "{{ dnsmasq_group }}"
-    mode: 0640
+    mode: "0640"
   loop: "{{ dnsmasq_dirs }}"
 
 - name: DNSmasq | adblock lists
@@ -47,9 +48,9 @@
     - config
   get_url:
     url : "{{ item.value }}"
-    dest: "{{ dnsmasq_conf_dir ~ 'hosts/' ~ item.key }}"
+    dest: "{{ dnsmasq_conf_dir }}/hosts/{{ item.key }}"
     group: "{{ dnsmasq_group }}"
-    mode: 0640
+    mode: "0640"
   loop: "{{ adblock_urls.items() }}"
 
 - name: DNSmasq | logrotate
