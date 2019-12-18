@@ -1,0 +1,23 @@
+# {{ ansible_managed }}
+# Firewall rules for dnsmasq
+{% set ipt = '/usr/sbin/iptables' %}
+{% set ch = 'in_dnsmasq' %}
+{% set in_rule = '-p udp --dport ' ~ dnsmasq_port ~ ' -j ' ~ ch %}
+
+[Service]
+# Setup ref to chain
+ExecStartPre=!-{{ ipt }} -N {{ ch }}
+ExecStartPre=!{{ ipt }} -F {{ ch }}
+ExecStartPre=!-{{ ipt }} -D INPUT {{ in_rule }}
+ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule }}
+
+ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ dnsmasq_interface }} -j ACCEPT
+{% for rule in dnsmasq_iptables %}
+ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
+{% endfor %}
+
+# Cleanup: unref, flush, delete
+ExecStopPost=!-{{ ipt }} -D INPUT {{ in_rule }}
+ExecStopPost=!-{{ ipt }} -F {{ ch }}
+ExecStopPost=!-{{ ipt }} -X {{ ch }}
+

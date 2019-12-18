@@ -12,10 +12,13 @@
   tags:
     - dir
   file:
-    path: "{{ dnsmasq_conf_dir }}/hosts"
+    path: "{{ item }}"
     state: directory
     group: "{{ dnsmasq_group }}"
     mode: "0750"
+  loop:
+    - "{{ dnsmasq_conf_dir }}/hosts"
+    - "{{ dnsmasq_dropin }}"
 
 # Requires a restart
 - name: DNSmasq | config
@@ -29,6 +32,7 @@
   loop:
     - { src: dnsmasq.conf, dest: /etc }
     - { src: dnsmasq, dest: /etc/default }
+    - { src: iptables.conf, dest: "{{ dnsmasq_dropin }}" }
   notify: restart dnsmasq
 
 # Only requires a reload (HUP)

@@ -1,11 +1,13 @@
 ---
 dnsmasq_interface: lo
+dnsmasq_port: 53
 dnsmasq_hosts: []
 dnsmasq_servers: []
 dnsmasq_dhcp_hosts: []
 dnsmasq_dhcp_opts: []
 dnsmasq_host_urls: {}
 dnsmasq_config: 
+dnsmasq_iptables: []
 
 dnsmasq_user: dnsmasq
 dnsmasq_group: dip
