@@ -7,11 +7,11 @@ Only tested on Debian stable, for now.
 
 ## Role Variables
 + `dnsmasq_interface` (default: lo): network interface to bind to
-+ `dnsmasq_hosts`: static host entries
-+ `dnsmasq_servers`: upstream DNS servers 
-+ `dnsmasq_dhcp_hosts`: static IPs issued via DHCP
-+ `dnsmasq_dhcp_opts`: options issued with DHCP lease
-+ `dnsmasq_host_urls`: dict of (name, URL) pairs
++ `dnsmasq_hosts`: list of (IP, host) tuples of static host entries
++ `dnsmasq_servers`: list of IPs of upstream DNS servers 
++ `dnsmasq_dhcp_hosts`: list of static IPs issued via DHCP
++ `dnsmasq_dhcp_opts`: list of options issued with DHCP lease
++ `dnsmasq_host_urls`: dict of (name, URL) pairs for additional static hosts
 + `dnsmasq_config`: multiline text to be inserted directly into `/etc/dnsmasq.conf`
 + `dnsmasq_user` (default: dnsmasq): unprivileged user to run as
 + `dnsmasq_group` (default: dip): unprivileged group to run as
