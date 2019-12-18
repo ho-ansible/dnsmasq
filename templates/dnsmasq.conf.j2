@@ -3,8 +3,8 @@
 interface={{ dnsmasq_interface }}	# listen (+ lo)
 bind-interfaces	# only bind to above interface
 
-user=dnsmasq	# Drop privs
-group=dip
+user={{ dnsmasq_user }}	# Drop privs
+group={{ dnsmasq_group }}
 
 log-facility={{ dnsmasq_log }}
 log-async
