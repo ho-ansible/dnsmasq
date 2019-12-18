@@ -33,7 +33,9 @@
     - { src: dnsmasq.conf, dest: /etc }
     - { src: dnsmasq, dest: /etc/default }
     - { src: iptables.conf, dest: "{{ dnsmasq_dropin }}" }
-  notify: restart dnsmasq
+  notify:
+    - daemon-reload
+    - restart dnsmasq
 
 # Only requires a reload (HUP)
 - name: DNSmasq | auxiliary config

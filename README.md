@@ -20,7 +20,7 @@ Only tested on Debian stable, for now.
 + `dnsmasq_conf_dir` (default: '/etc/dnsmasq.d'): where all config is stored 
 
 ## Dependencies
-None.
++ [ho-ansible.systemd-networkd](https://github.com/ho-ansible/systemd-networkd)
 
 ## License
 Ansible role licensed [MIT](LICENSE).
