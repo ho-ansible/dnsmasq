@@ -25,9 +25,8 @@ cache-size=200		# Number of DNS results
 
 no-resolv		# only use specified servers
 servers-file={{ dnsmasq_conf_dir }}/servers
-
-{% for dir in dnsmasq_dirs %}
-{{ dir ~ 'dir=' ~ dnsmasq_conf_dir ~ '/' ~ dir }}
-{% endfor %}
+dhcp_hostsfile={{ dnsmasq_conf_dir }}/dhcp_hosts
+dhcp_optsfile={{ dnsmasq_conf_dir }}/dhcp_opts
+hostsdir={{ dnsmasq_conf_dir }}/hosts
 
 {{ dnsmasq_config }}

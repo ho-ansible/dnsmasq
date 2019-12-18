@@ -12,13 +12,13 @@
   tags:
     - dir
   file:
-    path: "{{ dnsmasq_conf_dir }}/{{ item }}"
+    path: "{{ dnsmasq_conf_dir }}/hosts"
     state: directory
     group: "{{ dnsmasq_group }}"
     mode: "0750"
-  loop: "{{ dnsmasq_dirs }}"
 
-- name: DNSmasq | static config
+# Requires a restart
+- name: DNSmasq | config
   tags:
   - config
   template:
@@ -29,20 +29,25 @@
   loop:
     - { src: dnsmasq.conf, dest: /etc }
     - { src: dnsmasq, dest: /etc/default }
-    - { src: servers, dest: "{{ dnsmasq_conf_dir }}" }
   notify: restart dnsmasq
 
-# Config in subdirs can be updated without restart
-- name: DNSmasq | dynamic config in subdirs
+# Only requires a reload (HUP)
+- name: DNSmasq | auxiliary config
   tags:
-    - config
+  - config
   template:
-    src : "{{ item }}.j2"
-    dest: "{{ dnsmasq_conf_dir }}/{{ item }}/main"
+    src : "{{ item.src }}.j2"
+    dest: "{{ dnsmasq_conf_dir }}/{{ item.dest | d() }}/{{ item.src }}"
     group: "{{ dnsmasq_group }}"
     mode: "0640"
-  loop: "{{ dnsmasq_dirs }}"
+  loop:
+    - { src: servers }
+    - { src: dhcp-hosts }
+    - { src: dhcp-opts }
+    - { src: hosts, dest: "hosts" }
+  notify: reload dnsmasq
 
+# Requires neither restart nor reload
 - name: DNSmasq | host lists from URL
   tags:
     - config
