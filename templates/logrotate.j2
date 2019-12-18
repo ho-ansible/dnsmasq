@@ -1,9 +1,0 @@
-## /etc/logrotate.d/dnsmasq
-# {{ ansible_managed }}
-
-{{ dnsmasq_log }} {
-  create 640 {{ dnsmasq_user }} adm
-  postrotate
-    [ ! -f {{ dnsmasq_pid }} ] || kill -HUP `cat {{ dnsmasq_pid }}`
-  endscript
-}

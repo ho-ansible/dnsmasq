@@ -6,10 +6,7 @@ bind-interfaces	# only bind to above interface
 user={{ dnsmasq_user }}	# Drop privs
 group={{ dnsmasq_group }}
 
-log-facility={{ dnsmasq_log }}
-log-async
 quiet-dhcp		# don't log DHCP traffic
-
 domain-needed		# Only forward FQDNs to upstream DNS
 bogus-priv		# Never forward private-IP reverse lookups
 bogus-nxdomain=64.94.110.11	# Verisign
@@ -22,8 +19,8 @@ expand-hosts		# Add domain to names from /etc/hosts
 conntrack		# Accting: inbound req + outbound upstream
 cache-size=200		# Number of DNS results
 #local-ttl=600		# Clients cache DNS results for this long
-
 no-resolv		# only use specified servers
+
 servers-file={{ dnsmasq_conf_dir }}/servers
 dhcp_hostsfile={{ dnsmasq_conf_dir }}/dhcp_hosts
 dhcp_optsfile={{ dnsmasq_conf_dir }}/dhcp_opts

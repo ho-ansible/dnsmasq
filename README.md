@@ -15,9 +15,7 @@ Only tested on Debian stable, for now.
 + `dnsmasq_config`: multiline text to be inserted directly into `/etc/dnsmasq.conf`
 + `dnsmasq_user` (default: dnsmasq): unprivileged user to run as
 + `dnsmasq_group` (default: dip): unprivileged group to run as
-+ `dnsmasq_conf_dir` (default: '/etc/dnsmasq.d'): where all config
-  is stored 
-+ `dnsmasq_log` (default: /var/log/dnsmasq): logfile
++ `dnsmasq_conf_dir` (default: '/etc/dnsmasq.d'): where all config is stored 
 
 ## Dependencies
 None.

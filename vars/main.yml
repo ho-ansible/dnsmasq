@@ -1,3 +1,1 @@
 ---
-# See /etc/init.d/dnsmasq (Debian)
-dnsmasq_pid: /run/dnsmasq/dnsmasq.pid

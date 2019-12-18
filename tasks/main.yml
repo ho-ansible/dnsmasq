@@ -58,13 +58,6 @@
     mode: "0640"
   loop: "{{ q('dict', dnsmasq_host_urls) }}"
 
-- name: DNSmasq | logrotate
-  tags:
-    - logrotate
-  template:
-    src: logrotate.j2
-    dest: /etc/logrotate.d/dnsmasq
-
 - name: DNSMasq | service
   tags:
   - service

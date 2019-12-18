@@ -11,4 +11,3 @@ dnsmasq_user: dnsmasq
 dnsmasq_group: dip
 
 dnsmasq_conf_dir: '/etc/dnsmasq.d'
-dnsmasq_log: /var/log/dnsmasq
