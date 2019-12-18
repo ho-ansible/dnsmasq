@@ -12,12 +12,11 @@ Only tested on Debian stable, for now.
 + `dnsmasq_dhcp_hosts`: static IPs issued via DHCP
 + `dnsmasq_dhcp_opts`: options issued with DHCP lease
 + `dnsmasq_host_urls`: dict of (name, URL) pairs
-+ `dnsmasq_config`: dict of (key, value) pairs for additional entries
-  in `/etc/dnsmasq.conf`
++ `dnsmasq_config`: multiline text to be inserted directly into `/etc/dnsmasq.conf`
 + `dnsmasq_user` (default: dnsmasq): unprivileged user to run as
 + `dnsmasq_group` (default: dip): unprivileged group to run as
-+ `dnsmasq_conf_dir` (default: '/etc/dnsmasq.d/'): where all config
-  is stored (must end in slash)
++ `dnsmasq_conf_dir` (default: '/etc/dnsmasq.d'): where all config
+  is stored 
 + `dnsmasq_log` (default: /var/log/dnsmasq): logfile
 
 ## Dependencies

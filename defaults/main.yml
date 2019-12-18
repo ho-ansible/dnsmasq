@@ -4,10 +4,8 @@ dnsmasq_hosts: []
 dnsmasq_servers: []
 dnsmasq_dhcp_hosts: []
 dnsmasq_dhcp_opts: []
+dnsmasq_host_urls: {}
 dnsmasq_config: 
-
-dnsmasq_host_urls:
-  StevenBlack: "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts"
 
 dnsmasq_user: dnsmasq
 dnsmasq_group: dip
