@@ -14,7 +14,6 @@ Only tested on Debian stable, for now.
 + `dnsmasq_dhcp_opts`: list of options issued with DHCP lease
 + `dnsmasq_host_urls`: dict of (name, URL) pairs for additional static hosts
 + `dnsmasq_config`: multiline text to be inserted directly into `/etc/dnsmasq.conf`
-+ `dnsmasq_iptables`: list of iptables rules to add to chain
 + `dnsmasq_user` (default: dnsmasq): unprivileged user to run as
 + `dnsmasq_group` (default: dip): unprivileged group to run as
 + `dnsmasq_conf_dir` (default: '/etc/dnsmasq.d'): where all config is stored 

@@ -2,7 +2,7 @@
 # Firewall rules for dnsmasq
 {% set ipt = '/usr/sbin/iptables' %}
 {% set ch = 'in_dnsmasq' %}
-{% set in_rule = '-p udp --dport ' ~ dnsmasq_port ~ ' -j ' ~ ch %}
+{% set in_rule = '-i ' ~ dnsmasq_interface ~ ' -j ' ~ ch %}
 
 [Service]
 # Setup ref to chain
@@ -11,10 +11,8 @@ ExecStartPre=!{{ ipt }} -F {{ ch }}
 ExecStartPre=!-{{ ipt }} -D INPUT {{ in_rule }}
 ExecStartPre=!{{ ipt }} -A INPUT {{ in_rule }}
 
-ExecStartPre=!{{ ipt }} -A {{ ch }} -i {{ dnsmasq_interface }} -j ACCEPT
-{% for rule in dnsmasq_iptables %}
-ExecStartPre=!-{{ ipt }} -A {{ ch }} {{ rule }}
-{% endfor %}
+ExecStartPre=!{{ ipt }} -A {{ ch }} -p udp --dport {{ dnsmasq_port }} -j ACCEPT
+ExecStartPre=!{{ ipt }} -A {{ ch }} -p udp --dport 67 -j ACCEPT
 
 # Cleanup: unref, flush, delete
 ExecStopPost=!-{{ ipt }} -D INPUT {{ in_rule }}
