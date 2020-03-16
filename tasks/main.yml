@@ -12,13 +12,15 @@
   tags:
     - dir
   file:
-    path: "{{ item }}"
+    path: "{{ item.dir }}"
     state: directory
-    group: "{{ dnsmasq_group }}"
-    mode: "0750"
+    group: "{{ item.group | default(omit) }}"
+    mode:  "{{ item.mode  | default(omit) }}"
   loop:
-    - "{{ dnsmasq_conf_dir }}/hosts"
-    - "{{ dnsmasq_dropin }}"
+    - dir: "{{ dnsmasq_conf_dir }}/hosts"
+      group: "{{ dnsmasq_group }}"
+      mode: "0750"
+    - dir: "{{ dnsmasq_dropin }}"
 
 # Requires a restart
 - name: DNSmasq | config
@@ -27,12 +29,19 @@
   template:
     src : "{{ item.src }}.j2"
     dest: "{{ item.dest }}/{{ item.src }}"
-    group: "{{ dnsmasq_group }}"
-    mode: "0640"
+    group: "{{ item.group | default(omit) }}"
+    mode:  "{{ item.mode  | default(omit) }}"
   loop:
-    - { src: dnsmasq.conf, dest: /etc }
-    - { src: dnsmasq, dest: /etc/default }
-    - { src: iptables.conf, dest: "{{ dnsmasq_dropin }}" }
+    - src: dnsmasq.conf
+      dest: /etc
+      group: "{{ dnsmasq_group }}"
+      mode: "0640"
+    - src: dnsmasq
+      dest: /etc/default
+      group: "{{ dnsmasq_group }}"
+      mode: "0640"
+    - src: iptables.conf
+      dest: "{{ dnsmasq_dropin }}"
   notify:
     - daemon-reload
     - restart dnsmasq
