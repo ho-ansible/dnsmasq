@@ -9,7 +9,7 @@ group={{ dnsmasq_group }}
 quiet-dhcp		# don't log DHCP traffic
 domain-needed		# Only forward FQDNs to upstream DNS
 filterwin2k		# Filter useless requests from Windows
-expand-hosts		# Add domain to names from /etc/hosts
+no-hosts		# Don't parse /etc/hosts
 conntrack		# Accting: inbound req + outbound upstream
 cache-size=200		# Number of DNS results
 local-ttl=600		# Clients cache DNS results for this long
