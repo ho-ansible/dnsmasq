@@ -29,8 +29,8 @@
   template:
     src : "{{ item.src }}.j2"
     dest: "{{ item.dest }}/{{ item.src }}"
-    group: "{{ item.group | default(omit) }}"
-    mode:  "{{ item.mode  | default(omit) }}"
+    group: "{{ item.group | d(omit) }}"
+    mode:  "{{ item.mode  | d(omit) }}"
   loop:
     - src: dnsmasq.conf
       dest: /etc
