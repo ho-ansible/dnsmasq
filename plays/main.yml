@@ -1,0 +1,7 @@
+#! /usr/bin/env ansible-playbook
+# Configure dnsmasq
+---
+- name: dnsmasq | DNS servers
+  hosts: all
+  roles:
+    - role: dnsmasq
