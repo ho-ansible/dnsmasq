@@ -18,6 +18,9 @@ Only tested on Debian stable, for now.
 + `dnsmasq_group` (default: dip): unprivileged group to run as
 + `dnsmasq_conf_dir` (default: '/etc/dnsmasq.d'): where all config is stored 
 
+## Playbooks
++ `main.yml`: apply dnsmasq role
+
 ## Dependencies
 + [ho-ansible.systemd-networkd](https://github.com/ho-ansible/systemd-networkd)
 
