@@ -2,25 +2,25 @@
 
 - name: DNSMasq | package
   tags:
-    - package
+  - package
   package:
     name:
-      - dnsmasq
-      - dnsmasq-utils
+    - dnsmasq
+    - dnsmasq-utils
 
 - name: DNSMasq | config subdirs
   tags:
-    - dir
+  - dir
   file:
     path: "{{ item.dir }}"
     state: directory
     group: "{{ item.group | default(omit) }}"
     mode:  "{{ item.mode  | default(omit) }}"
   loop:
-    - dir: "{{ dnsmasq_conf_dir }}/hosts"
-      group: "{{ dnsmasq_group }}"
-      mode: "0750"
-    - dir: "{{ dnsmasq_systemd }}.d"
+  - dir: "{{ dnsmasq_conf_dir }}/hosts"
+    group: "{{ dnsmasq_group }}"
+    mode: "0750"
+  - dir: "{{ dnsmasq_iptables_conf | dirname }}"
 
 # Requires a restart
 - name: DNSmasq | config
@@ -32,19 +32,19 @@
     group: "{{ item.group | d(omit) }}"
     mode:  "{{ item.mode  | d(omit) }}"
   loop:
-    - src: dnsmasq.conf
-      dest: /etc
-      group: "{{ dnsmasq_group }}"
-      mode: "0640"
-    - src: dnsmasq
-      dest: /etc/default
-      group: "{{ dnsmasq_group }}"
-      mode: "0640"
-    - src: iptables.conf
-      dest: "{{ dnsmasq_systemd }}.d"
+  - src: dnsmasq.conf
+    dest: /etc
+    group: "{{ dnsmasq_group }}"
+    mode: 0640
+  - src: dnsmasq
+    dest: /etc/default
+    group: "{{ dnsmasq_group }}"
+    mode: 0640
+  - src: iptables.conf
+    dest: "{{ dnsmasq_iptables_conf | dirname }}"
   notify:
-    - daemon-reload
-    - restart dnsmasq
+  - daemon-reload
+  - restart dnsmasq
 
 # Only requires a reload (HUP)
 - name: DNSmasq | auxiliary config

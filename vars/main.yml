@@ -1,2 +1,2 @@
 ---
-dnsmasq_systemd: /etc/systemd/system/dnsmasq.service
+dnsmasq_iptables_conf: /etc/systemd/system/dnsmasq.service.d/iptables.conf
