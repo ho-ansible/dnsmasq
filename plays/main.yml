@@ -6,3 +6,5 @@
   hosts: dns
   roles:
     - role: dnsmasq
+      tags:
+        - dnsmasq

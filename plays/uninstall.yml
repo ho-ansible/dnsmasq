@@ -8,3 +8,5 @@
     - include_role:
         name: dnsmasq
         tasks_from: uninstall.yml
+      tags:
+        - dnsmasq
