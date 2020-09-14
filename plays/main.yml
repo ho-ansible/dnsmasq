@@ -5,6 +5,6 @@
 - name: dnsmasq | DNS servers
   hosts: dns
   roles:
-    - role: dnsmasq
-      tags:
-        - dnsmasq
+  - role: dnsmasq
+    tags:
+    - dnsmasq

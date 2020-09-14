@@ -5,8 +5,8 @@
 - name: dnsmasq | uninstall
   hosts: dns
   tasks:
-    - include_role:
-        name: dnsmasq
-        tasks_from: uninstall.yml
-      tags:
-        - dnsmasq
+  - include_role:
+      name: dnsmasq
+      tasks_from: uninstall.yml
+    tags:
+    - dnsmasq

@@ -10,8 +10,8 @@
     name: "{{ item }}"
     state: absent
   loop:
-    - dnsmasq-utils
-    - dnsmasq
+  - dnsmasq-utils
+  - dnsmasq
 
 - name: dnsmasq | apt autoremove
   apt:
@@ -23,7 +23,7 @@
     path: "{{ item }}"
     state: absent
   loop:
-    - /etc/dnsmasq.conf
-    - /etc/default/dnsmasq
-    - "{{ dnsmasq_conf_dir }}"
-    - "{{ dnsmasq_iptables_conf | dirname }}"
+  - /etc/dnsmasq.conf
+  - /etc/default/dnsmasq
+  - "{{ dnsmasq_conf_dir }}"
+  - "{{ dnsmasq_iptables_conf | dirname }}"
