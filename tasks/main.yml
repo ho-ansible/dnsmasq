@@ -20,7 +20,7 @@
     - dir: "{{ dnsmasq_conf_dir }}/hosts"
       group: "{{ dnsmasq_group }}"
       mode: "0750"
-    - dir: "{{ dnsmasq_dropin }}"
+    - dir: "{{ dnsmasq_systemd }}.d"
 
 # Requires a restart
 - name: DNSmasq | config
@@ -41,7 +41,7 @@
       group: "{{ dnsmasq_group }}"
       mode: "0640"
     - src: iptables.conf
-      dest: "{{ dnsmasq_dropin }}"
+      dest: "{{ dnsmasq_systemd }}.d"
   notify:
     - daemon-reload
     - restart dnsmasq

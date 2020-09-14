@@ -1,2 +1,2 @@
 ---
-dnsmasq_dropin: /etc/systemd/system/dnsmasq.service.d
+dnsmasq_systemd: /etc/systemd/system/dnsmasq.service

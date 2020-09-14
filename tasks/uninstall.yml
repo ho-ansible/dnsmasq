@@ -26,4 +26,4 @@
     - /etc/dnsmasq.conf
     - /etc/default/dnsmasq
     - "{{ dnsmasq_conf_dir }}"
-    - "{{ dnsmasq_dropin }}"
+    - "{{ dnsmasq_systemd }}.d"
