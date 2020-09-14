@@ -20,6 +20,7 @@ Only tested on Debian stable, for now.
 
 ## Playbooks
 + `main.yml`: apply dnsmasq role
++ `uninstall.yml`: remove dnsmasq. Run before removing config from inventory.
 
 ## Dependencies
 + [ho-ansible.systemd-networkd](https://github.com/ho-ansible/systemd-networkd)

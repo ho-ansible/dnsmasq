@@ -1,0 +1,29 @@
+---
+- name: dnsmasq | disable services
+  service:
+    name: dnsmasq
+    state: stopped
+    enabled: no
+
+- name: dnsmasq | uninstall package
+  package:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - dnsmasq-utils
+    - dnsmasq
+
+- name: dnsmasq | apt autoremove
+  apt:
+    autoremove: yes
+  ignore_errors: yes
+
+- name: dnsmasq | remove config
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/dnsmasq.conf
+    - /etc/default/dnsmasq
+    - "{{ dnsmasq_conf_dir }}"
+    - "{{ dnsmasq_dropin }}"

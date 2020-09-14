@@ -1,7 +1,8 @@
 #! /usr/bin/env ansible-playbook
 # Configure dnsmasq
+# Replace 'dns' with your own inventory group
 ---
 - name: dnsmasq | DNS servers
-  hosts: all
+  hosts: dns
   roles:
     - role: dnsmasq

@@ -1,0 +1,10 @@
+#! /usr/bin/env ansible-playbook
+# Uninstall dnsmasq DHCP/DNS server
+# Replace 'dns' with your own inventory group
+---
+- name: dnsmasq | uninstall
+  hosts: dns
+  tasks:
+    - include_role:
+        name: dnsmasq
+        tasks_from: uninstall.yml
