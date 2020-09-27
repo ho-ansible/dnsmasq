@@ -26,7 +26,7 @@ Only tested on Debian stable, for now.
 + [ho-ansible.systemd-networkd](https://github.com/ho-ansible/systemd-networkd)
 
 ## License
-Ansible role licensed [MIT](LICENSE).
++ Ansible role licensed [MIT](LICENSE)
 
 ## Author Information
-Sean Ho, https://github.com/ho-ansible/
++ Ansible role by [Sean Ho](https://github.com/ho-ansible/)
