@@ -47,20 +47,51 @@
   - restart dnsmasq
 
 # Only requires a reload (HUP)
-- name: DNSmasq | auxiliary config
+- name: DNSmasq | upstream DNS servers
   tags:
   - config
   template:
-    src : "{{ item.src }}.j2"
-    dest: "{{ dnsmasq_conf_dir }}/{{ item.dest | d() }}/{{ item.src }}"
+    src : servers.j2
+    dest: "{{ dnsmasq_conf_dir }}/servers"
     group: "{{ dnsmasq_group }}"
     mode: "0640"
-  loop:
-  - { src: servers }
-  - { src: dhcp-hosts }
-  - { src: dhcp-opts }
-  - { src: hosts, dest: "hosts" }
   notify: reload dnsmasq
+  when: dnsmasq_servers
+
+# Only requires a reload (HUP)
+- name: DNSmasq | DHCP host config
+  tags:
+  - config
+  template:
+    src : dhcp-hosts.j2
+    dest: "{{ dnsmasq_conf_dir }}/dhcp-hosts"
+    group: "{{ dnsmasq_group }}"
+    mode: "0640"
+  notify: reload dnsmasq
+  when: dnsmasq_dhcp_hosts
+
+# Only requires a reload (HUP)
+- name: DNSmasq | DHCP options
+  tags:
+  - config
+  template:
+    src : dhcp-opts.j2
+    dest: "{{ dnsmasq_conf_dir }}/dhcp-opts"
+    group: "{{ dnsmasq_group }}"
+    mode: "0640"
+  notify: reload dnsmasq
+  when: dnsmasq_dhcp_opts
+
+# Requires neither restart nor reload
+- name: DNSmasq | static hosts
+  tags:
+  - config
+  template:
+    src : hosts.j2
+    dest: "{{ dnsmasq_conf_dir }}/hosts/hosts"
+    group: "{{ dnsmasq_group }}"
+    mode: "0640"
+  when: dnsmasq_hosts
 
 # Requires neither restart nor reload
 - name: DNSmasq | host lists from URL
