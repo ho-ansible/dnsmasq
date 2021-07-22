@@ -24,7 +24,7 @@ dhcp-hostsfile={{ dnsmasq_conf_dir }}/dhcp-hosts
 {% if dnsmasq_dhcp_opts %}
 dhcp-optsfile={{ dnsmasq_conf_dir }}/dhcp-opts
 {% endif %}
-{% if dnsmasq_hosts or dnsmasq_host_urls %}
+{% if dnsmasq_hosts %}
 hostsdir={{ dnsmasq_conf_dir }}/hosts
 {% endif %}
 

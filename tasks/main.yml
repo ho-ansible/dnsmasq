@@ -108,18 +108,6 @@
     mode: "0640"
   when: dnsmasq_hosts
 
-# Requires neither restart nor reload
-- name: DNSmasq | host lists from URL
-  tags:
-  - config
-  get_url:
-    url : "{{ item.value }}"
-    dest: "{{ dnsmasq_conf_dir }}/hosts/{{ item.key }}"
-    group: "{{ dnsmasq_group }}"
-    mode: "0640"
-    force: yes
-  loop: "{{ q('dict', dnsmasq_host_urls) }}"
-
 - name: DNSMasq | service
   tags:
   - service

@@ -12,7 +12,6 @@ Only tested on Debian stable, for now.
 + `dnsmasq_servers`: list of IPs of upstream DNS servers 
 + `dnsmasq_dhcp_hosts`: list of static IPs issued via DHCP
 + `dnsmasq_dhcp_opts`: list of options issued with DHCP lease
-+ `dnsmasq_host_urls`: dict of (name, URL) pairs for additional static hosts
 + `dnsmasq_includes`: dict of (name, URL) config file pairs for `conf-dir`
 + `dnsmasq_config`: multiline text to be inserted directly into `/etc/dnsmasq.conf`
 + `dnsmasq_user` (default: dnsmasq): unprivileged user to run as
