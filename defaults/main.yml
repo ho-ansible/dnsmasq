@@ -6,6 +6,7 @@ dnsmasq_servers: []
 dnsmasq_dhcp_hosts: []
 dnsmasq_dhcp_opts: []
 dnsmasq_host_urls: {}
+dnsmasq_includes: {}
 dnsmasq_config: 
 
 dnsmasq_user: dnsmasq

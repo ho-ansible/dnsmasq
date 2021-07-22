@@ -28,4 +28,6 @@ dhcp-optsfile={{ dnsmasq_conf_dir }}/dhcp-opts
 hostsdir={{ dnsmasq_conf_dir }}/hosts
 {% endif %}
 
+conf-dir={{ dnsmasq_conf_dir }}/includes,*.conf
+
 {{ dnsmasq_config }}

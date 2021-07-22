@@ -20,6 +20,9 @@
   - dir: "{{ dnsmasq_conf_dir }}/hosts"
     group: "{{ dnsmasq_group }}"
     mode: "0750"
+  - dir: "{{ dnsmasq_conf_dir }}/includes"
+    group: "{{ dnsmasq_group }}"
+    mode: "0750"
   - dir: "{{ dnsmasq_iptables_conf | dirname }}"
 
 # Requires a restart
@@ -45,6 +48,18 @@
   notify:
   - daemon-reload
   - restart dnsmasq
+
+# Requires a restart
+- name: DNSmasq | config from URL
+  tags:
+  - config
+  get_url:
+    url : "{{ item.value }}"
+    dest: "{{ dnsmasq_conf_dir }}/includes/{{ item.key }}.conf"
+    group: "{{ dnsmasq_group }}"
+    mode: "0640"
+    force: yes
+  loop: "{{ q('dict', dnsmasq_includes) }}"
 
 # Only requires a reload (HUP)
 - name: DNSmasq | upstream DNS servers
