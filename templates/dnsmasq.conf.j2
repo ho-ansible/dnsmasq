@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 
-interface={{ dnsmasq_interface }}	# listen (+ lo)
-bind-interfaces	# only bind to above interface
+interface={{ dnsmasq_interface }}
+bind-interfaces		# bind only to above
 
 user={{ dnsmasq_user }}	# Drop privs
 group={{ dnsmasq_group }}
